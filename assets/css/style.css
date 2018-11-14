@@ -340,14 +340,14 @@ body {
   */
 /* ========================== unit-r-game ========================*/
   .char-image {
-    width: 120px;
-    height: 120px;
-    border: double 5px #777777;
+    width: 200px;
+    height: 200px;
+    border: double 7px #777777;
     border-radius: 16px;
     -webkit-box-decoration-break: clone;
     -o-box-decoration-break: clone;
     box-decoration-break: clone;
-    
+    padding: 20px;
   }
 
   button {
@@ -358,6 +358,15 @@ body {
     background: #4aaaa5;
     border: 0 none;
   }
+
+  
+/* Hover Pseudo Class:
+    Changes the style only when mouse hovers
+    over the preceding element.
+*/
+.char-image:hover {
+  border: black;
+}
 
   /* ======================================================= */
   /* ==================screen resolution==================== */
