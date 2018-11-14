@@ -1,13 +1,15 @@
 // Variables
 var charIsSelected = false;
-var defenderIsSelected = false;
+var defIsSelected = false;
 var attackStarted = false;
-var selectedCharName = "";
-var selectedDefender = "";
-var selectedAttackPower = 0;
-var selectedHealthPoints = 0;
-var DefenderCounterAttackPower = 0;
-var DefenderHealthPoints = 0;
+var attackSucceed = false;
+var selectedChar = "";
+var selectedDef = "";
+var selectedAP = 0;
+var selectedHP = 0;
+var DefenderCAP = 0;
+var DefenderHP = 0;
+var gainedAP = 0;
 $("#reset-btn").hide();
 
 
@@ -47,11 +49,13 @@ function fReload() {
 
 function continueGame() {
     attackStarted = false;
-    selectedDefender = "";
-    selectedAttackPower = 0;
-    selectedHealthPoints = 0;
-    DefenderCounterAttackPower = 0;
-    DefenderHealthPoints = 0;
+
+    selectedAP = gainedAP;
+    selectedHP = 100;
+    DefenderCAP = 0;
+    DefenderHP = 100;
+    selectedDef = "";
+
 
     $("#attack-msg").text("");
     $("#attack-msg").hide();
@@ -81,30 +85,30 @@ $(".char-image").on("click", function () {
     // if user selected the character then select the defender
     if (charIsSelected) {
 
-        if (defenderIsSelected) {
+        if (defIsSelected) {
             console.log("both character and defender selected");
         }
         else {
             continueGame();
-            selectedDefender = ($(this).attr("char-name"));
-            console.log("selected defender: " + selectedDefender);
+            selectedDef = ($(this).attr("char-name"));
+            console.log("selected defender: " + selectedDef);
 
             $("#enemies-box > img").each(function (index, element) {
-                if ($(this).attr("char-name") == selectedDefender) {
+                if ($(this).attr("char-name") == selectedDef) {
                     console.log("selected defender goes to defender box: " + $(this).attr("char-name"));
                     $("#defender-box").append($(this));
                 }
             });
-            defenderIsSelected = true;
+            defIsSelected = true;
         }
     }
     // first click : select the main character
     else {
-        selectedCharName = ($(this).attr("char-name"));
-        console.log("char name: " + selectedCharName);
+        selectedChar = ($(this).attr("char-name"));
+        console.log("char name: " + selectedChar);
 
         $("img").each(function (index, element) {
-            if ($(this).attr("char-name") != selectedCharName) {
+            if ($(this).attr("char-name") != selectedChar) {
                 console.log("defender list: " + $(this).attr("char-name"));
                 $("#enemies-box").append($(this));
             }
@@ -123,56 +127,57 @@ $("#attack-btn").on("click", function () {
         $("#attack-msg").text("No enemy here. Select the enemy from 'Enemies Available To Attack'");
     }
     else {
-        // $("#char-box  > img")  selectedCharName
-        // $("#defender-box > img")  selectedDefender
-        // var charName = $("#char-box > img").attr("char-name");
-        // console.log("attack char: " + charName);
+
         if (attackStarted == false) {
-            console.log("attack : selectedCharName : " + selectedCharName);
-            console.log("attack : selectedDefender : " + selectedDefender);
-            selectedAttackPower = parseInt(($("#char-box  > img").attr("attack-power")));
-            selectedHealthPoints = parseInt(($("#char-box  > img").attr("health-points")));
-            console.log("selectedAttackPower: " + selectedAttackPower);
-            console.log("selectedHealthPoints: " + selectedHealthPoints);
-            DefenderCounterAttackPower = parseInt(($("#defender-box > img").attr("counter-attack-power")));
-            DefenderHealthPoints = parseInt(($("#defender-box > img").attr("health-points")));
-            console.log("DefenderCounterAttackPower: " + DefenderCounterAttackPower);
-            console.log("DefenderHealthPoints: " + DefenderHealthPoints);
+            console.log("attack : selectedChar : " + selectedChar);
+            console.log("attack : selectedDef : " + selectedDef);
+            if (attackSucceed == false) {
+                selectedAP = parseInt(($("#char-box  > img").attr("attack-power")));
+            }
+            selectedHP = parseInt(($("#char-box  > img").attr("health-points")));
+            console.log("selectedAP: " + selectedAP);
+            console.log("selectedHP: " + selectedHP);
+            DefenderCAP = parseInt(($("#defender-box > img").attr("counter-attack-power")));
+            DefenderHP = parseInt(($("#defender-box > img").attr("health-points")));
+            console.log("DefenderCAP: " + DefenderCAP);
+            console.log("DefenderHP: " + DefenderHP);
             $("#attack-msg").show();
-            $("#attack-msg").text("You attacked " + selectedDefender + " for " + selectedAttackPower + " damage. " + selectedDefender + " attacked you back for " + DefenderCounterAttackPower + " damage.");
-            // DefenderHealthPoints = DefenderHealthPoints - selectedAttackPower;
-            // selectedHealthPoints = selectedHealthPoints - DefenderCounterAttackPower;
-            // console.log("first attack DefenderHealthPoints: " + DefenderHealthPoints);
-            // console.log("first attack selectedHealthPoints: " + selectedHealthPoints);
+            $("#attack-msg").text("You attacked " + selectedDef + " for " + selectedAP + " damage. " + selectedDef + " attacked you back for " + DefenderCAP + " damage.");
+
             attackStarted = true;
         }
         else {
-            selectedAttackPower += selectedAttackPower;
-            DefenderCounterAttackPower += DefenderCounterAttackPower;
-            console.log("22222 selectedAttackPower: " + selectedAttackPower);
-            console.log("22222 DefenderCounterAttackPower: " + DefenderCounterAttackPower);
-            DefenderHealthPoints = DefenderHealthPoints - selectedAttackPower;
-            selectedHealthPoints = selectedHealthPoints - DefenderCounterAttackPower;
-            console.log("22222 DefenderHealthPoints: " + DefenderHealthPoints);
-            console.log("22222 selectedHealthPoints: " + selectedHealthPoints);
-            $("#attack-msg").text("You attacked " + selectedDefender + " for " + selectedAttackPower + " damage. " + selectedDefender + " attacked you back for " + DefenderCounterAttackPower + " damage.");
+            selectedAP += selectedAP;
+            DefenderCAP += DefenderCAP;
+            console.log("22222 selectedAP: " + selectedAP);
+            console.log("22222 DefenderCAP: " + DefenderCAP);
+            DefenderHP = DefenderHP - selectedAP;
+            selectedHP = selectedHP - DefenderCAP;
+            console.log("22222 DefenderHP: " + DefenderHP);
+            console.log("22222 selectedHP: " + selectedHP);
+            $("#attack-msg").text("You attacked " + selectedDef + " for " + selectedAP + " damage. " + selectedDef + " attacked you back for " + DefenderCAP + " damage.");
         }
 
         // All of the same game win-lose logic applies. So the rest remains unchanged.
         // Tie == win
-        if (((selectedHealthPoints >= 0) && (DefenderHealthPoints < 0)) ||
-            ((selectedHealthPoints <= 0) && (DefenderHealthPoints <= 0)) && (selectedHealthPoints >= DefenderHealthPoints)) {
-            $("#attack-msg").text("You have defeated " + selectedDefender + ". You can choose to fight another enemy.");
+        if (((selectedHP >= 0) && (DefenderHP < 0)) ||
+            ((selectedHP <= 0) && (DefenderHP <= 0)) && (selectedHP >= DefenderHP)) {
+            $("#attack-msg").text("You have defeated " + selectedDef + ". You can choose to fight another enemy.");
+            // if user character have defeated the defender, the character takes defender's Counter Attack Power
+            attackSucceed = true;
+            gainedAP = parseInt(($("#char-box > img").attr("attack-power"))) + parseInt(($("#defender-box > img").attr("counter-attack-power")));
+            console.log("gainedAP: " + gainedAP);
             $("#defender-box > img").remove();
-            defenderIsSelected = false;
+
+            defIsSelected = false;
             if ($("#enemies-box > img").length == 0) {
                 $("#attack-msg").text("You Won!!!! GAME OVER!!!");
                 $("#reset-btn").show();
                 $("#reset-btn").text("restart");
             }
         }
-        else if (((selectedHealthPoints < 0) && (DefenderHealthPoints >= 0)) ||
-            ((selectedHealthPoints < 0) && (DefenderHealthPoints <= 0)) && (selectedHealthPoints < DefenderHealthPoints)) {
+        else if (((selectedHP < 0) && (DefenderHP >= 0)) ||
+            ((selectedHP < 0) && (DefenderHP <= 0)) && (selectedHP < DefenderHP)) {
             $("#attack-msg").text("You been defeated. GAME OVER");
             $("#reset-btn").show();
             $("#reset-btn").text("restart");
