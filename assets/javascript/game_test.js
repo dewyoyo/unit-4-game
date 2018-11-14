@@ -71,12 +71,13 @@ for (var i = 0; i < gameChar.length; i++) {
     imageChar.addClass("char-image");
     // console.log(gameChar[i][1]);
     imageChar.attr("src", gameChar[i][1]);
-    imageChar.attr("title", gameChar[i][0]);
     imageChar.attr("char-name", gameChar[i][0]);
+    imageChar.text(gameChar[i][0]);
     imageChar.attr("health-points", gameChar[i][2]);
     imageChar.attr("attack-power", gameChar[i][3]);
     imageChar.attr("counter-attack-power", gameChar[i][4]);
     $("#char-box").append(imageChar);
+
 };
 
 // select attack character and move the unselected character into Enmies

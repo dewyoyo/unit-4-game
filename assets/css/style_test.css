@@ -339,25 +339,25 @@ body {
   }
   */
 /* ========================== unit-r-game ========================*/
-  /* .char-image {
-    width: 200px;
-    height: 200px;
+  .char-image {
+    width: 100px;
+    height: 100px;
     border: double 7px #777777;
     border-radius: 16px;
     -webkit-box-decoration-break: clone;
     -o-box-decoration-break: clone;
     box-decoration-break: clone;
-    padding: 20px;
+    /* padding: 20px; */
   }
 
   button {
-    padding: 10px 30px;
+    /* padding: 10px 30px; */
     font-size: 18px;
     color: #ffffff;
     cursor: pointer;
     background: #4aaaa5;
     border: 0 none;
-  } */
+  }
 
   
 /* Hover Pseudo Class:
