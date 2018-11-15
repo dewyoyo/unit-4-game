@@ -339,33 +339,61 @@ body {
   }
   */
 /* ========================== unit-r-game ========================*/
-  .char-image {
-    width: 100px;
-    height: 100px;
-    border: double 7px #777777;
-    border-radius: 16px;
-    -webkit-box-decoration-break: clone;
-    -o-box-decoration-break: clone;
-    box-decoration-break: clone;
-    /* padding: 20px; */
-  }
+ 
+.img-work {
+  position: relative;
+  /* float: left; */
+  /* margin: 10px 0 15px; */
+  overflow: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
 
-  button {
-    /* padding: 10px 30px; */
-    font-size: 18px;
-    color: #ffffff;
-    cursor: pointer;
-    background: #4aaaa5;
-    border: 0 none;
-  }
+p#char-msg,
+p#enemies-msg
+p#defender-msg,
+.char-msg,
+.enemies-msg,
+.defender-msg {
+  position: relative;
+  bottom: 65px;
+  overflow: auto;
+  display: block;
+  width: 132px;
+  padding: 3px;
+  /* margin: 0 9px 8px 9px; */
+  margin: 0;
+  font-size: 11pt;
+  color: #ffffff;
+  /* text-align: center; */
+  background: #4aaaa5;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
 
-  
+.char-image {
+  width: 150px;
+  height: 150px;
+  border: double 5px #777777;
+  border-radius: 16px;
+  padding: 5px 5px 30px 5px;
+}  
 /* Hover Pseudo Class:
     Changes the style only when mouse hovers
     over the preceding element.
 */
-.char-image:hover {
-  border: black;
+.char-image:hover{
+  border: dashed 7px yellowgreen;
+}
+button {
+  padding: 10px 30px;
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
+  background: #4aaaa5;
+  border: 0 none;
 }
 
   /* ======================================================= */

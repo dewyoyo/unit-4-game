@@ -72,18 +72,22 @@ for (var i = 0; i < gameChar.length; i++) {
     // console.log(gameChar[i][1]);
     imageChar.attr("src", gameChar[i][1]);
     imageChar.attr("char-name", gameChar[i][0]);
-    imageChar.text(gameChar[i][0]);
     imageChar.attr("health-points", gameChar[i][2]);
     imageChar.attr("attack-power", gameChar[i][3]);
     imageChar.attr("counter-attack-power", gameChar[i][4]);
     $("#char-box").append(imageChar);
-
+    var charMsg = $("<p>");
+    charMsg.addClass("char-msg");
+    // console.log(gameChar[i][1]);
+    charMsg.attr("txt-msg", gameChar[i][1]);
+    charMsg.attr("style", "margin:0; padding:0;");
+    $("#char-box").append(charMsg);
 };
 
 // select attack character and move the unselected character into Enmies
+// if user selected the character then select the defender
 $(".char-image").on("click", function () {
-
-    // if user selected the character then select the defender
+   
     if (charIsSelected) {
 
         if (defIsSelected) {
@@ -120,7 +124,7 @@ $(".char-image").on("click", function () {
 });
 
 
-// =====================start the attack
+// =====================start the attack =============================
 $("#attack-btn").on("click", function () {
 
     console.log("number of images in enemies-box : " + $("#enemies-box > img").length);
